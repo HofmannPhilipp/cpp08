@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 13:12:40 by phhofman          #+#    #+#             */
-/*   Updated: 2025/09/17 15:28:29 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/09/17 15:30:58 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,19 @@ public:
     MutantStack(const MutantStack &other) = default;
     MutantStack &operator=(const MutantStack &other) = default;
 
-    typename std::stack<T>::container_type::iterator begin();
-    typename std::stack<T>::container_type::iterator end();
+    using iterator = typename std::stack<T>::container_type::iterator;
+    iterator begin();
+    iterator end();
 };
 
 template <typename T>
-typename std::stack<T>::container_type::iterator MutantStack<T>::begin()
+typename MutantStack<T>::iterator MutantStack<T>::begin()
 {
     return this->c.begin();
 }
+
 template <typename T>
-typename std::stack<T>::container_type::iterator MutantStack<T>::end()
+typename MutantStack<T>::iterator MutantStack<T>::end()
 {
     return this->c.end();
 }
