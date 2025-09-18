@@ -1,5 +1,5 @@
 NAME = main
-CXX = c++
+CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -Werror
 
 SRCS = main.cpp Span.cpp

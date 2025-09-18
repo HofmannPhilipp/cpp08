@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:27:04 by phhofman          #+#    #+#             */
-/*   Updated: 2025/09/16 17:11:45 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:18:01 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include <limits>
+#include <iostream>
 
 Span::Span() : N(0)
 {
@@ -46,6 +47,7 @@ void Span::addNumber(unsigned int val)
         throw std::length_error("Maximum container size reached");
     v.push_back(val);
 }
+
 void Span::addNumber(std::vector<unsigned int>::iterator begin, std::vector<unsigned int>::iterator end)
 {
     if (v.size() + std::distance(begin, end) > N)
@@ -60,24 +62,26 @@ unsigned int Span::size()
 
 unsigned int Span::shortestSpan()
 {
-    if (N < 2 || v.size() < 2)
+    if (v.size() < 2)
         throw std::length_error("Need at least two numbers to find a span");
 
-    std::sort(v.begin(), v.end());
+    auto temp = this->v;
+    std::sort(temp.begin(), temp.end());
 
     unsigned int minSpan = std::numeric_limits<unsigned int>::max();
 
-    for (size_t i = 1; i < N; ++i)
+    for (size_t i = 1; i < temp.size(); ++i)
     {
-        unsigned int diff = v[i] - v[i - 1];
+        unsigned int diff = temp[i] - temp[i - 1];
         if (diff < minSpan)
             minSpan = diff;
     }
     return minSpan;
 }
+
 unsigned int Span::longestSpan()
 {
-    if (N < 2 || v.size() < 2)
+    if (v.size() < 2)
         throw std::length_error("Need at least two numbers to find a span");
 
     auto [minIt, maxIt] = std::minmax_element(v.begin(), v.end());
